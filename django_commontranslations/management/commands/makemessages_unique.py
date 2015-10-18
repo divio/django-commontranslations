@@ -2,6 +2,7 @@
 import glob
 import os
 import polib
+from django import VERSION as DJANGO_VERSION
 from django.core.management.commands.makemessages import (
     Command as OriginalMakeMessagesCommand)
 from django.utils import translation
@@ -9,7 +10,11 @@ from django.utils.translation.trans_real import CONTEXT_SEPARATOR
 
 
 class Command(OriginalMakeMessagesCommand):
-    requires_model_validation = False
+    # Django version 1.7+ requires_model_validation is deprecated
+    # and the value of 'requires_system_checks' is used (which is defined in
+    # the original command). The attribute is completely removed in Django 1.9.
+    if DJANGO_VERSION < (1, 7):
+        requires_model_validation = False
     can_import_settings = True
 
     def handle_noargs(self, *args, **options):
