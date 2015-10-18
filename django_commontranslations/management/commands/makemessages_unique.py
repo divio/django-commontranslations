@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import glob
-from django.utils.translation.trans_real import CONTEXT_SEPARATOR
-import polib
-from django.utils import translation
 import os
-from django.core.management.commands.makemessages import Command as OriginalMakeMessagesCommand
+import polib
+from django.core.management.commands.makemessages import (
+    Command as OriginalMakeMessagesCommand)
+from django.utils import translation
+from django.utils.translation.trans_real import CONTEXT_SEPARATOR
 
 
 class Command(OriginalMakeMessagesCommand):
